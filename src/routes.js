@@ -5,12 +5,15 @@ import { BrowserRouter, Switch, Route, Redirect } from "react-router-dom";
 import isAuthenticated from "./auth";
 
 const PrivateRoute = ({ component: Component, ...rest }) => {
-  const render = (props) =>
-    isAuthenticated() ? (
-      <Component {...rest} />
-    ) : (
-      <Redirect to={{ pathname: "/login", state: { from: props.location } }} />
-    );
+  const render = () =>
+    isAuthenticated() ? <Component {...rest} /> : <Redirect to="/login" />;
+
+  return <Route {...rest} render={render} />;
+};
+
+const PublicRoute = ({ component: Component, ...rest }) => {
+  const render = () =>
+    isAuthenticated() ? <Redirect to="/" /> : <Component {...rest} />;
 
   return <Route {...rest} render={render} />;
 };
@@ -19,8 +22,8 @@ const Routes = () => (
   <BrowserRouter>
     <Switch>
       <PrivateRoute path="/" exact={true} component={Home} />
-      <Route path="/login" component={Login} />
-      <Route path="/cadastre-se" component={Register} />
+      <PublicRoute path="/login" component={Login} />
+      <PublicRoute path="/cadastre-se" component={Register} />
       <Route path="*">
         <Redirect to="/" />
       </Route>
