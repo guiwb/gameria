@@ -19,7 +19,6 @@ const Routes = () => (
   <BrowserRouter>
     <Switch>
       <PrivateRoute path="/" exact={true} component={Home} />
-      <PrivateRoute path="/ola" component={() => <p>olá</p>} />
       <Route path="/login" component={Login} />
       <Route path="/cadastre-se" component={Register} />
       <Route path="*">
