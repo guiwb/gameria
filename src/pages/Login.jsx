@@ -9,7 +9,9 @@ import Text from "../components/ui/Text";
 const Login = () => (
   <Box>
     <Form action="">
-      <Title>Faça o seu Login</Title>
+      <Title>
+        Faça o seu <b>Login</b>!
+      </Title>
       <Input type="email" name="email" placeholder="email" />
       <Input type="password" name="password" placeholder="senha" />
       <Button type="submit">Entrar</Button>

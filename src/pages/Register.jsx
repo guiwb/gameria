@@ -9,7 +9,9 @@ import Text from "../components/ui/Text";
 const Register = () => (
   <Box>
     <Form action="">
-      <Title>Cadastre-se na plataforma!</Title>
+      <Title>
+        <b>Cadastre-se</b> na plataforma!
+      </Title>
       <Input type="email" name="email" placeholder="email" />
       <Input type="password" name="password" placeholder="senha" />
       <Input
