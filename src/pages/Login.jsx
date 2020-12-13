@@ -6,22 +6,17 @@ import Button from "../components/ui/Button";
 import Input from "../components/ui/Input";
 import Text from "../components/ui/Text";
 
-const Register = () => (
+const Login = () => (
   <Box>
     <Form action="">
-      <Title>Cadastre-se na plataforma!</Title>
+      <Title>Faça o seu Login</Title>
       <Input type="email" name="email" placeholder="email" />
       <Input type="password" name="password" placeholder="senha" />
-      <Input
-        type="password"
-        name="passwordConfirm"
-        placeholder="confirme a senha"
-      />
-      <Button type="submit">cadastre-me</Button>
-      <Text>Já tem registro?</Text>
-      <Link to="/login">Faça o login aqui!</Link>
+      <Button type="submit">Entrar</Button>
+      <Text>Ainda não tem registro?</Text>
+      <Link to="/cadastre-se">Cadastre-se aqui!</Link>
     </Form>
   </Box>
 );
 
-export default Register;
+export default Login;

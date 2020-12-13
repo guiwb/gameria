@@ -9,7 +9,7 @@ export default styled.button`
   text-transform: lowercase;
   color: #fff;
   transition: all 0.23s ease;
-  margin: 5px 0;
+  margin: 15px 0;
   cursor: pointer;
 
   &:hover {

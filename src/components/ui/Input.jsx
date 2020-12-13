@@ -10,7 +10,7 @@ export default styled.input`
   color: #fff;
   transition: all 0.23s ease;
   margin: 5px 0;
-  width: calc(100% - 60px);
+  width: 240px;
 
   &:focus {
     background-color: ${(props) => props.theme.colors.black};
