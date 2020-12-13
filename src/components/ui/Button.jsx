@@ -1,7 +1,11 @@
 import styled from "styled-components";
 
+const bgColor = ({ theme: { colors }, color = "blue" }) => colors[color];
+const bgColorDarken = ({ theme: { colors }, color = "blue" }) =>
+  colors[`${color}Dark`];
+
 export default styled.button`
-  background-color: ${(props) => props.theme.colors.blue};
+  background-color: ${bgColor};
   border-radius: 30px;
   outline: none;
   border: none;
@@ -9,10 +13,10 @@ export default styled.button`
   text-transform: lowercase;
   color: #fff;
   transition: all 0.23s ease;
-  margin: 15px 0;
+  margin: 15px;
   cursor: pointer;
 
   &:hover {
-    background-color: ${(props) => props.theme.colors.blueDark};
+    background-color: ${bgColorDarken};
   }
 `;
