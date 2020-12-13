@@ -13,7 +13,7 @@ export default styled.button`
   text-transform: lowercase;
   color: #fff;
   transition: all 0.23s ease;
-  margin: 15px;
+  margin: 15px 0;
   cursor: pointer;
 
   &:hover {
