@@ -17,7 +17,7 @@ const Picture = styled.img`
 `;
 
 const Name = styled.p`
-  margin-left: 20px;
+  margin: 0 20px;
   font-size: 16px;
   color: #fff;
 `;
