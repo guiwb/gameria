@@ -1,25 +1,18 @@
-import styled, { ThemeProvider } from "styled-components";
+import styled from "styled-components";
+import ThemeProvider from "./providers/theme";
 import Routes from "./routes";
 
 const Wrapper = styled.div`
   display: flex;
   justify-content: center;
   align-items: center;
-  width: 100%;
+  width: 1200px;
+  margin: 0 auto;
   min-height: 100vh;
 `;
 
-const colors = {
-  black: "#222831",
-  blackMediumLight: "#292F38",
-  blackLight: "#393e46",
-  blue: "#00adb5",
-  blueDark: "#009da3",
-  gray: "#eeeeee",
-};
-
 const App = () => (
-  <ThemeProvider theme={{ colors }}>
+  <ThemeProvider>
     <Wrapper>
       <Routes />
     </Wrapper>
