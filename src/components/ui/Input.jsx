@@ -6,7 +6,6 @@ export default styled.input`
   outline: none;
   border: none;
   padding: 15px 30px;
-  text-transform: lowercase;
   color: #fff;
   transition: all 0.23s ease;
   margin: 5px 0;
