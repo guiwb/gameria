@@ -87,6 +87,11 @@ const Home = () => {
     setLoadingButton(false);
   };
 
+  const removeGame = (id) => {
+    const allGames = games.filter((game) => game.id !== id);
+    setGames(allGames);
+  };
+
   useEffect(getGames, [orderField]);
 
   const ListGames = () =>
@@ -135,6 +140,7 @@ const Home = () => {
         <EditGame
           game={selectedGame}
           clickedOut={() => setSelectedGame(null)}
+          onDelete={removeGame}
         />
       )}
     </Container>
