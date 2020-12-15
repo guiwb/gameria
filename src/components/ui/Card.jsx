@@ -60,8 +60,8 @@ const Title = styled.h1`
   text-transform: uppercase;
 `;
 
-const Card = () => (
-  <Wrapper>
+const Card = ({ onClick }) => (
+  <Wrapper onClick={onClick}>
     <Overlay />
     <Genre>Ação</Genre>
     <Rating>5.0</Rating>
