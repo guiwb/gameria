@@ -13,6 +13,10 @@ const firebaseConfig = {
 };
 firebase.initializeApp(firebaseConfig);
 
+export const handleSnapshot = (snapshot) => ({
+  ...snapshot.val(),
+  ...{ id: snapshot.key },
+});
 export const gamesRef = firebase.database().ref("games");
 export const user = firebase.auth().currentUser;
 export const auth = firebase.auth();
