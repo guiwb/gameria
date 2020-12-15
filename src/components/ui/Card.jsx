@@ -13,7 +13,7 @@ const Wrapper = styled.div`
   }
 `;
 
-const Genre = styled.div`
+const Category = styled.div`
   position: absolute;
   top: 20px;
   left: 20px;
@@ -60,13 +60,13 @@ const Title = styled.h1`
   text-transform: uppercase;
 `;
 
-const Card = ({ onClick }) => (
+const Card = ({ onClick, game }) => (
   <Wrapper onClick={onClick}>
     <Overlay />
-    <Genre>Ação</Genre>
-    <Rating>5.0</Rating>
-    <Image src="https://scontent.fpoa8-1.fna.fbcdn.net/v/t1.0-9/74352081_2228318253940054_1604344175396913152_n.jpg?_nc_cat=100&ccb=2&_nc_sid=a4a2d7&_nc_eui2=AeFaJB5HF68VFuX4rFZNJYeYzeAvrbHnI8zN4C-tsecjzAKSnqR_HhpFZPQxXg8UBKBz5kjE55y9b_AUhKOLPwgY&_nc_ohc=viJTlSujVk0AX_7lwUg&_nc_ht=scontent.fpoa8-1.fna&oh=5667e016a642221d32933cf78299efbf&oe=5FFD8488" />
-    <Title>Mario Bros</Title>
+    <Category>{game.category}</Category>
+    <Rating>{game.rating}</Rating>
+    <Image src={game.image} />
+    <Title>{game.name}</Title>
   </Wrapper>
 );
 
