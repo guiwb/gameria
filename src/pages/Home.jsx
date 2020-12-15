@@ -46,6 +46,7 @@ const Form = styled(UIForm)`
 
 const Home = () => {
   const [selectedGame, setSelectedGame] = useState(null);
+  const [loadingButton, setLoadingButton] = useState(false);
 
   return (
     <Container>
@@ -60,7 +61,13 @@ const Home = () => {
             placeholder="Busque por um jogo..."
             light
           />
-          <Button type="submit">Buscar</Button>
+          <Button
+            loading={loadingButton}
+            onClick={() => setLoadingButton(!loadingButton)}
+            type="button"
+          >
+            Buscar
+          </Button>
         </div>
 
         <div>

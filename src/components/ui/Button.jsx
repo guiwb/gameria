@@ -1,4 +1,5 @@
-import styled from "styled-components";
+import styled, { keyframes } from "styled-components";
+import { AiOutlineLoading3Quarters } from "react-icons/ai";
 
 const bgColor = ({ theme: { colors }, color = "blue" }) => colors[color];
 const bgColorDarken = ({ theme: { colors }, color = "blue" }) =>
@@ -12,7 +13,21 @@ const SCALES = {
 
 const scaleSize = ({ size = "md" }) => SCALES[size];
 
-export default styled.button`
+const rotate = keyframes`
+  from {
+    transform: rotate(0deg);
+  }
+
+  to {
+    transform: rotate(360deg);
+  }
+`;
+
+const LoadingButton = styled(AiOutlineLoading3Quarters)`
+  animation: ${rotate} 1s ease infinite;
+`;
+
+const StyledButton = styled.button`
   background-color: ${bgColor};
   border-radius: 30px;
   outline: none;
@@ -29,3 +44,11 @@ export default styled.button`
     background-color: ${bgColorDarken};
   }
 `;
+
+const Button = ({ children, loading, onClick }) => (
+  <StyledButton onClick={onClick}>
+    {loading ? <LoadingButton /> : <span>{children}</span>}
+  </StyledButton>
+);
+
+export default Button;
