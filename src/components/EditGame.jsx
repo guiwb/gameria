@@ -28,6 +28,9 @@ const NewGame = ({ clickedOut, game }) => (
         value={game.rating}
       />
       <Button type="submit">Alterar</Button>
+      <Button type="submit" color="red">
+        Deletar
+      </Button>
     </Form>
   </Modal>
 );
