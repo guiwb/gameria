@@ -16,3 +16,7 @@ firebase.initializeApp(firebaseConfig);
 
 export const gamesRef = firebase.database().ref("games");
 export const user = firebase.auth().currentUser;
+export const {
+  loginWithEmailAndPassword,
+  createUserWithEmailAndPassword,
+} = firebase;
