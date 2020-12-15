@@ -10,13 +10,23 @@ const NewGame = ({ clickedOut, game }) => (
       Altere o <b>jogo</b>
     </Title>
     <Form>
-      <Input type="text" name="image" placeholder="imagem" value={game.image} />
-      <Input type="text" name="name" placeholder="nome" value={game.name} />
+      <Input
+        type="text"
+        name="image"
+        placeholder="imagem"
+        defaultValue={game.image}
+      />
+      <Input
+        type="text"
+        name="name"
+        placeholder="nome"
+        defaultValue={game.name}
+      />
       <Input
         type="text"
         name="category"
         placeholder="categoria"
-        value={game.category}
+        defaultValue={game.category}
       />
       <Input
         type="number"
@@ -25,7 +35,7 @@ const NewGame = ({ clickedOut, game }) => (
         step="0.1"
         name="rating"
         placeholder="avaliação"
-        value={game.rating}
+        defaultValue={game.rating}
       />
       <Button type="submit">Alterar</Button>
       <Button type="submit" color="red">
