@@ -1,6 +1,8 @@
 import styled from "styled-components";
 import Button from "../Button";
 import Profile from "./Profile";
+import NewGame from "../../NewGame";
+import { useState } from "react";
 
 const Container = styled.div`
   width: 100%;
@@ -9,11 +11,18 @@ const Container = styled.div`
   align-items: center;
 `;
 
-const Index = () => (
-  <Container>
-    <Profile />
-    <Button size="lg">Adicionar Jogo</Button>
-  </Container>
-);
+const Index = () => {
+  const [showModal, setShowModal] = useState(false);
+
+  return (
+    <Container>
+      <Profile />
+      <Button onClick={() => setShowModal(true)} size="lg">
+        Adicionar Jogo
+      </Button>
+      {showModal && <NewGame clickedOut={() => setShowModal(false)} />}
+    </Container>
+  );
+};
 
 export default Index;
