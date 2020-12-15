@@ -6,7 +6,8 @@ import Input from "../components/ui/Input";
 import Select from "../components/ui/Select";
 import Button from "../components/ui/Button";
 import EditGame from "../components/EditGame";
-import { useState } from "react";
+import { useEffect, useState } from "react";
+import { gamesRef, handleSnapshot } from "../firebase";
 
 const Container = styled.div`
   display: flex;
@@ -47,13 +48,58 @@ const Form = styled(UIForm)`
 const Home = () => {
   const [selectedGame, setSelectedGame] = useState(null);
   const [loadingButton, setLoadingButton] = useState(false);
+  const [orderField, setOrderField] = useState("rating");
+
+  const [games, setGames] = useState([]);
+
+  const handleGames = (snapshot) => {
+    let allGames = [];
+    snapshot.forEach((snap) => {
+      allGames.push(handleSnapshot(snap));
+    });
+
+    setGames(allGames);
+  };
+
+  const getGames = () => {
+    gamesRef.orderByChild(orderField).on("value", handleGames);
+  };
+
+  const searchGames = async (e) => {
+    e.preventDefault();
+
+    setLoadingButton(true);
+    const search = document
+      .querySelector("input[name=search]")
+      .value.toString();
+    console.log(search);
+
+    try {
+      await gamesRef
+        .orderByChild(orderField)
+        .startAt(search)
+        .endAt(`${search}\uf8ff`)
+        .on("value", handleGames);
+    } catch (e) {
+      alert("Ocorreu um erro ao buscar os jogos!");
+    }
+
+    setLoadingButton(false);
+  };
+
+  useEffect(getGames, [orderField]);
+
+  const ListGames = () =>
+    games.map((game) => (
+      <Card onClick={() => setSelectedGame(game)} game={game} key={game.id} />
+    ));
 
   return (
     <Container>
       <Navbar />
       <Title>Meus jogos</Title>
 
-      <Form direction="row">
+      <Form direction="row" onSubmit={searchGames}>
         <div>
           <Input
             name="search"
@@ -61,21 +107,21 @@ const Home = () => {
             placeholder="Busque por um jogo..."
             light
           />
-          <Button
-            loading={loadingButton}
-            onClick={() => setLoadingButton(!loadingButton)}
-            type="button"
-          >
+          <Button loading={loadingButton} type="submit">
             Buscar
           </Button>
         </div>
 
         <div>
-          <label for="orderBy">Ordenar por: </label>
-          <Select id="orderBy" name="orderBy" light>
-            <option value="name" selected>
-              Nome
-            </option>
+          <label>Ordenar por: </label>
+          <Select
+            id="orderBy"
+            name="orderBy"
+            value={orderField}
+            onChange={(e) => setOrderField(e.target.value)}
+            light
+          >
+            <option value="name">Nome</option>
             <option value="rating">Avaliação</option>
             <option value="category">Categoria</option>
           </Select>
@@ -83,19 +129,7 @@ const Home = () => {
       </Form>
 
       <List>
-        <Card
-          onClick={() =>
-            setSelectedGame({
-              name: "Mario",
-              image: "",
-              category: "aventura",
-              rating: "5",
-            })
-          }
-        />
-        <Card />
-        <Card />
-        <Card />
+        <ListGames />
       </List>
       {selectedGame && (
         <EditGame
