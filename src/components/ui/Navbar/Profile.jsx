@@ -4,7 +4,7 @@ import Button from "../Button";
 const Wrapper = styled.div`
   height: 60px;
   border-radius: 60px;
-  background-color: ${(props) => props.theme.colors.blackLight};
+  background-color: ${(props) => props.theme.colors.blackMediumLight};
   display: flex;
   align-items: center;
   padding: 0 15px 0 0;

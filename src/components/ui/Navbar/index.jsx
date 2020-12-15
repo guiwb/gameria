@@ -5,7 +5,8 @@ import Profile from "./Profile";
 const Container = styled.div`
   width: 100%;
   display: flex;
-  justify-content: space-around;
+  justify-content: space-between;
+  align-items: center;
 `;
 
 const Index = () => (
