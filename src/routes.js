@@ -2,7 +2,9 @@ import Home from "./pages/Home";
 import Login from "./pages/Login";
 import Register from "./pages/Register";
 import { BrowserRouter, Switch, Route, Redirect } from "react-router-dom";
-import isAuthenticated from "./auth";
+import { auth } from "./firebase";
+
+const isAuthenticated = () => auth?.currentUser;
 
 const PrivateRoute = ({ component: Component, ...rest }) => {
   const render = () =>

@@ -1,5 +1,7 @@
 import styled from "styled-components";
 import Button from "../Button";
+import { auth } from "../../../firebase";
+import { useHistory } from "react-router-dom";
 
 const Wrapper = styled.div`
   height: 60px;
@@ -22,12 +24,27 @@ const Name = styled.p`
   color: #fff;
 `;
 
-const Profile = () => (
-  <Wrapper>
-    <Picture src="https://scontent.fpoa8-1.fna.fbcdn.net/v/t1.0-9/74352081_2228318253940054_1604344175396913152_n.jpg?_nc_cat=100&ccb=2&_nc_sid=a4a2d7&_nc_eui2=AeFaJB5HF68VFuX4rFZNJYeYzeAvrbHnI8zN4C-tsecjzAKSnqR_HhpFZPQxXg8UBKBz5kjE55y9b_AUhKOLPwgY&_nc_ohc=viJTlSujVk0AX_7lwUg&_nc_ht=scontent.fpoa8-1.fna&oh=5667e016a642221d32933cf78299efbf&oe=5FFD8488" />
-    <Name>Seja bem-vindo, Guilherme</Name>
-    <Button color="red">logout</Button>
-  </Wrapper>
-);
+const Profile = () => {
+  const history = useHistory();
+
+  const logout = async () => {
+    try {
+      await auth.signOut();
+      history.push("/login");
+    } catch (error) {
+      alert("Ocorreu um erro ao deslogar!");
+    }
+  };
+
+  return (
+    <Wrapper>
+      <Picture src="https://scontent.fpoa8-1.fna.fbcdn.net/v/t1.0-9/74352081_2228318253940054_1604344175396913152_n.jpg?_nc_cat=100&ccb=2&_nc_sid=a4a2d7&_nc_eui2=AeFaJB5HF68VFuX4rFZNJYeYzeAvrbHnI8zN4C-tsecjzAKSnqR_HhpFZPQxXg8UBKBz5kjE55y9b_AUhKOLPwgY&_nc_ohc=viJTlSujVk0AX_7lwUg&_nc_ht=scontent.fpoa8-1.fna&oh=5667e016a642221d32933cf78299efbf&oe=5FFD8488" />
+      <Name>Seja bem-vindo, Guilherme</Name>
+      <Button onClick={logout} color="red">
+        logout
+      </Button>
+    </Wrapper>
+  );
+};
 
 export default Profile;

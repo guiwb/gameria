@@ -11,12 +11,8 @@ const firebaseConfig = {
   messagingSenderId: "561890909364",
   appId: "1:561890909364:web:2cdedbbbaf0614139e0be1",
 };
-
 firebase.initializeApp(firebaseConfig);
 
 export const gamesRef = firebase.database().ref("games");
 export const user = firebase.auth().currentUser;
-export const {
-  loginWithEmailAndPassword,
-  createUserWithEmailAndPassword,
-} = firebase;
+export const auth = firebase.auth();
