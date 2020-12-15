@@ -45,8 +45,8 @@ const StyledButton = styled.button`
   }
 `;
 
-const Button = ({ children, loading, onClick }) => (
-  <StyledButton onClick={onClick}>
+const Button = ({ children, loading, ...rest }) => (
+  <StyledButton {...rest}>
     {loading ? <LoadingButton /> : <span>{children}</span>}
   </StyledButton>
 );
