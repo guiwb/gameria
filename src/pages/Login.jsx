@@ -7,10 +7,14 @@ import Input from "../components/ui/Input";
 import Text from "../components/ui/Text";
 import { auth } from "../firebase";
 import { useHistory } from "react-router-dom";
+import { useState } from "react";
 
 const Login = () => {
+  const [loading, setLoading] = useState(false);
+
   const history = useHistory();
   const submit = async (e) => {
+    setLoading(true);
     e.preventDefault();
 
     const email = document.querySelector("input[type=email]").value;
@@ -23,6 +27,7 @@ const Login = () => {
       console.log(e);
       alert("Usuário ou senha inválidos!");
     }
+    setLoading(false);
   };
 
   return (
@@ -33,7 +38,9 @@ const Login = () => {
         </Title>
         <Input type="email" name="email" placeholder="email" />
         <Input type="password" name="password" placeholder="senha" />
-        <Button type="submit">Entrar</Button>
+        <Button type="submit" loading={loading}>
+          Entrar
+        </Button>
         <Text>Ainda não tem registro?</Text>
         <Link to="/cadastre-se">Cadastre-se aqui!</Link>
       </Form>

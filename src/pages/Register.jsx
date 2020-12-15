@@ -7,11 +7,15 @@ import Input from "../components/ui/Input";
 import Text from "../components/ui/Text";
 import { auth } from "../firebase";
 import { useHistory } from "react-router-dom";
+import { useState } from "react";
 
 const Register = (props) => {
+  const [loading, setLoading] = useState(false);
+
   const history = useHistory();
 
   const submit = async (e) => {
+    setLoading(true);
     e.preventDefault();
 
     const photoURL = document.querySelector("input[name=picture]").value;
@@ -29,6 +33,7 @@ const Register = (props) => {
       console.log(e);
       alert(`Ocorreu o seguinte erro ao criar o usuário: ${e.message}`);
     }
+    setLoading(false);
   };
 
   return (
@@ -41,7 +46,9 @@ const Register = (props) => {
         <Input type="text" name="name" placeholder="nome completo" />
         <Input type="email" name="email" placeholder="email" />
         <Input type="password" name="password" placeholder="senha" />
-        <Button type="submit">cadastre-me</Button>
+        <Button type="submit" loading={loading}>
+          cadastre-me
+        </Button>
         <Text>Já tem registro?</Text>
         <Link to="/login">Faça o login aqui!</Link>
       </Form>
