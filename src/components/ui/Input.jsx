@@ -13,6 +13,7 @@ export default styled.input`
   width: 240px;
 
   &:focus {
-    background-color: ${(props) => props.theme.colors.black};
+    background-color: ${({ light = false, theme }) =>
+      light ? theme.colors.blackLight : theme.colors.black};
   }
 `;
