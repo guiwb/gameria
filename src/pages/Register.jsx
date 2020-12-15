@@ -15,7 +15,9 @@ const Register = (props) => {
     e.preventDefault();
 
     const photoURL = document.querySelector("input[name=picture]").value;
-    const displayName = document.querySelector("input[name=name]").value;
+    const displayName = document
+      .querySelector("input[name=name]")
+      .value.toLowerCase();
     const email = document.querySelector("input[type=email]").value;
     const password = document.querySelector("input[type=password]").value;
 
