@@ -23,7 +23,7 @@ const Register = () => {
     setLoading(true);
     e.preventDefault();
 
-    const photoURL = getField("picture");
+    const photoURL = getField("picture", false);
     const displayName = getField("name");
     const email = getField("email");
     const password = getField("password", false);
