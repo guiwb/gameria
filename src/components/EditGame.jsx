@@ -6,14 +6,17 @@ import Title from "./ui/Title";
 import { gamesRef } from "../firebase";
 import { useState } from "react";
 
-const NewGame = ({ clickedOut, game, onDelete }) => {
+const NewGame = ({ clickedOut, game }) => {
   const [deleteLoading, setDeleteLoading] = useState(false);
+  const [updateLoading, setUpdateLoading] = useState(false);
+
+  const getField = (name) =>
+    document.querySelector(`input[name=${name}]`).value.toLowerCase();
 
   const deleteGame = async () => {
     setDeleteLoading(true);
     try {
       await gamesRef.child(game.id).remove();
-      onDelete(game.id);
       clickedOut();
     } catch (error) {
       console.log("Ocorreu um erro ao deletar o jogo!");
@@ -21,12 +24,31 @@ const NewGame = ({ clickedOut, game, onDelete }) => {
     setDeleteLoading(false);
   };
 
+  const updateGame = async (e) => {
+    e.preventDefault();
+    setUpdateLoading(true);
+
+    try {
+      const image = getField("image");
+      const name = getField("name");
+      const category = getField("category");
+      const rating = getField("rating");
+
+      const data = { image, name, category, rating };
+
+      await gamesRef.child(game.id).update(data);
+      clickedOut();
+    } catch (error) {}
+
+    setUpdateLoading(false);
+  };
+
   return (
     <Modal clickedOut={clickedOut}>
       <Title>
         Altere o <b>jogo</b>
       </Title>
-      <Form>
+      <Form onSubmit={updateGame}>
         <Input
           type="text"
           name="image"
@@ -54,11 +76,13 @@ const NewGame = ({ clickedOut, game, onDelete }) => {
           placeholder="avaliação"
           defaultValue={game.rating}
         />
-        <Button type="submit">Alterar</Button>
+        <Button type="submit" loading={updateLoading}>
+          Alterar
+        </Button>
         <Button
           type="button"
-          onClick={deleteGame}
           color="red"
+          onClick={deleteGame}
           loading={deleteLoading}
         >
           Deletar

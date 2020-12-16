@@ -26,7 +26,6 @@ const NewGame = ({ clickedOut }) => {
       await gamesRef.push(data);
       clickedOut();
     } catch (error) {
-      console.log(error);
       alert("Ocorreu um erro ao cadastrar o jogo!");
     }
     setLoading(false);

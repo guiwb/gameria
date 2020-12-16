@@ -55,6 +55,7 @@ const Home = () => {
   const [selectedGame, setSelectedGame] = useState(null);
   const [loadingButton, setLoadingButton] = useState(false);
   const [orderField, setOrderField] = useState("rating");
+  const [search, setSearch] = useState("");
   const [games, setGames] = useState([]);
 
   const handleGames = (snapshot) => {
@@ -67,36 +68,24 @@ const Home = () => {
   };
 
   const getGames = () => {
-    gamesRef.orderByChild(orderField).on("value", handleGames);
+    gamesRef
+      .orderByChild(orderField)
+      .startAt(search)
+      .endAt(`${search}\uf8ff`)
+      .on("value", handleGames);
   };
 
   const searchGames = async (e) => {
     e.preventDefault();
-
     setLoadingButton(true);
-    const search = document
-      .querySelector("input[name=search]")
-      .value.toString();
 
-    try {
-      await gamesRef
-        .orderByChild(orderField)
-        .startAt(search)
-        .endAt(`${search}\uf8ff`)
-        .on("value", handleGames);
-    } catch (e) {
-      alert("Ocorreu um erro ao buscar os jogos!");
-    }
+    const text = document.querySelector("input[name=search]").value;
+    setSearch(text.toLowerCase());
 
     setLoadingButton(false);
   };
 
-  const removeGame = (id) => {
-    const allGames = games.filter((game) => game.id !== id);
-    setGames(allGames);
-  };
-
-  useEffect(getGames, [orderField]);
+  useEffect(getGames, [orderField, search]);
 
   const ListGames = () =>
     games.map((game) => (
@@ -149,7 +138,6 @@ const Home = () => {
         <EditGame
           game={selectedGame}
           clickedOut={() => setSelectedGame(null)}
-          onDelete={removeGame}
         />
       )}
     </Container>
