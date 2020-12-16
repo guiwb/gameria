@@ -40,13 +40,17 @@ const Profile = () => {
     }
   };
 
-  const user = auth.currentUser;
-
   return (
     <Wrapper>
-      <Picture src={user.photoURL} />
+      <Picture
+        src={auth.currentUser.photoURL}
+        onError={(e) =>
+          (e.target.src =
+            "https://i0.wp.com/www.techcult.com.br/wp-content/uploads/2017/03/perfil-twitter.png?resize=1024%2C1024&ssl=1")
+        }
+      />
       <Name>
-        Seja bem-vindo, <b>{user.displayName}</b>
+        Seja bem-vindo, <b>{auth.currentUser.displayName}</b>
       </Name>
       <Button onClick={logout} color="red">
         logout
