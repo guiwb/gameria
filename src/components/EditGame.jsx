@@ -7,7 +7,7 @@ import { gamesRef } from "../firebase";
 import { useState } from "react";
 import { getFieldValue } from "../utils";
 
-const NewGame = ({ clickedOut, game }) => {
+const EditGame = ({ clickedOut, game }) => {
   const [deleteLoading, setDeleteLoading] = useState(false);
   const [updateLoading, setUpdateLoading] = useState(false);
 
@@ -90,4 +90,4 @@ const NewGame = ({ clickedOut, game }) => {
   );
 };
 
-export default NewGame;
+export default EditGame;
