@@ -8,25 +8,21 @@ import Text from "../components/ui/Text";
 import { auth } from "../firebase";
 import { useHistory } from "react-router-dom";
 import { useState } from "react";
+import { getFieldValue } from "../utils";
 
 const Register = () => {
   const [loading, setLoading] = useState(false);
 
   const history = useHistory();
 
-  const getField = (name, lower = true) => {
-    const { value } = document.querySelector(`input[name=${name}]`);
-    return lower ? value.toLowerCase() : value;
-  };
-
   const submit = async (e) => {
     setLoading(true);
     e.preventDefault();
 
-    const photoURL = getField("picture", false);
-    const displayName = getField("name");
-    const email = getField("email");
-    const password = getField("password", false);
+    const photoURL = getFieldValue("picture", false);
+    const displayName = getFieldValue("name");
+    const email = getFieldValue("email");
+    const password = getFieldValue("password", false);
 
     try {
       await auth.createUserWithEmailAndPassword(email, password);

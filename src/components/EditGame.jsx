@@ -5,13 +5,11 @@ import Button from "./ui/Button";
 import Title from "./ui/Title";
 import { gamesRef } from "../firebase";
 import { useState } from "react";
+import { getFieldValue } from "../utils";
 
 const NewGame = ({ clickedOut, game }) => {
   const [deleteLoading, setDeleteLoading] = useState(false);
   const [updateLoading, setUpdateLoading] = useState(false);
-
-  const getField = (name) =>
-    document.querySelector(`input[name=${name}]`).value.toLowerCase();
 
   const deleteGame = async () => {
     setDeleteLoading(true);
@@ -29,10 +27,10 @@ const NewGame = ({ clickedOut, game }) => {
     setUpdateLoading(true);
 
     try {
-      const image = getField("image");
-      const name = getField("name");
-      const category = getField("category");
-      const rating = getField("rating");
+      const image = getFieldValue("image", false);
+      const name = getFieldValue("name");
+      const category = getFieldValue("category");
+      const rating = getFieldValue("rating");
 
       const data = { image, name, category, rating };
 
