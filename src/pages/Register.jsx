@@ -9,19 +9,24 @@ import { auth } from "../firebase";
 import { useHistory } from "react-router-dom";
 import { useState } from "react";
 
-const Register = (props) => {
+const Register = () => {
   const [loading, setLoading] = useState(false);
 
   const history = useHistory();
+
+  const getField = (name, lower = true) => {
+    const { value } = document.querySelector(`input[name=${name}]`);
+    return lower ? value.toLowerCase() : value;
+  };
 
   const submit = async (e) => {
     setLoading(true);
     e.preventDefault();
 
-    const photoURL = document.querySelector("input[name=picture]").value;
-    const displayName = document.querySelector("input[name=name]");
-    const email = document.querySelector("input[type=email]").value;
-    const password = document.querySelector("input[type=password]").value;
+    const photoURL = getField("picture");
+    const displayName = getField("name");
+    const email = getField("email");
+    const password = getField("password", false);
 
     try {
       await auth.createUserWithEmailAndPassword(email, password);
