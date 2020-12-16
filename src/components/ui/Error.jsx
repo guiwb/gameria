@@ -10,4 +10,6 @@ const ListError = styled.div`
   color: rgba(255, 255, 255, 0.4);
 `;
 
-export default ({ children }) => <ListError>{children}</ListError>;
+const Error = ({ children }) => <ListError>{children}</ListError>;
+
+export default Error;

@@ -5,6 +5,7 @@ import UIForm from "../components/ui/Form";
 import Input from "../components/ui/Input";
 import Select from "../components/ui/Select";
 import Button from "../components/ui/Button";
+import Error from "../components/ui/Error";
 import EditGame from "../components/EditGame";
 import { useEffect, useState } from "react";
 import { gamesRef, handleSnapshot } from "../firebase";
@@ -45,15 +46,19 @@ const Form = styled(UIForm)`
   }
 `;
 
+const SearchButton = styled(Button)`
+  margin-left: 20px;
+  transform: scale(1.2);
+`;
+
 const Home = () => {
   const [selectedGame, setSelectedGame] = useState(null);
   const [loadingButton, setLoadingButton] = useState(false);
   const [orderField, setOrderField] = useState("rating");
-
   const [games, setGames] = useState([]);
 
   const handleGames = (snapshot) => {
-    let allGames = [];
+    const allGames = [];
     snapshot.forEach((snap) => {
       allGames.push(handleSnapshot(snap));
     });
@@ -72,7 +77,6 @@ const Home = () => {
     const search = document
       .querySelector("input[name=search]")
       .value.toString();
-    console.log(search);
 
     try {
       await gamesRef
@@ -112,9 +116,9 @@ const Home = () => {
             placeholder="Busque por um jogo..."
             light
           />
-          <Button loading={loadingButton} type="submit">
+          <SearchButton loading={loadingButton} type="submit">
             Buscar
-          </Button>
+          </SearchButton>
         </div>
 
         <div>
@@ -133,9 +137,14 @@ const Home = () => {
         </div>
       </Form>
 
-      <List>
-        <ListGames />
-      </List>
+      {games.length ? (
+        <List>
+          <ListGames />
+        </List>
+      ) : (
+        <Error>Ops! Não encontramos nenhum jogo :/</Error>
+      )}
+
       {selectedGame && (
         <EditGame
           game={selectedGame}
