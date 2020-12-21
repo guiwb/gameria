@@ -65,7 +65,13 @@ const Card = ({ onClick, game }) => (
     <Overlay />
     <Category>{game.category}</Category>
     <Rating>{game.rating}</Rating>
-    <Image src={game.image} />
+    <Image
+      src={game.image}
+      onError={(e) =>
+        (e.target.src =
+          "https://gizmodo.uol.com.br/wp-content/blogs.dir/8/files/2015/04/barras.png")
+      }
+    />
     <Title>{game.name}</Title>
   </Wrapper>
 );
